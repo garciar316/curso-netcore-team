@@ -9,28 +9,29 @@ using TGL.WebApp.Models;
 
 namespace TGL.WebApp.Pages.Students
 {
-    public class AddModel : PageModel
+    public class EditModel : PageModel
     {
         public StudentStore StudentStore { get; set; }
-        public AddModel(StudentStore studentStore)
+        public EditModel(StudentStore studentStore)
         {
             StudentStore = studentStore;
         }
 
         [BindProperty]
         public Student Student { get; set; }
-        public void OnGet()
+        public void OnGet(Guid id) //aqui recibe el que envio en route
         {
-
+            Student = StudentStore.GetStudentById(id);
         }
+
         public IActionResult OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            //Add
-            StudentStore.AddStudent(Student);
+            //Edit
+            StudentStore.EditStudent(Student);
             return RedirectToPage("./Index");
         }
     }

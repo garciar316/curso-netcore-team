@@ -10,39 +10,48 @@
     <br />
 
     <form method="post">
-        <table class="table text-center">
+        <table class="striped">
 
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Nit</th>
-                    <th scope="col">Delete</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>Nit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
 
             @foreach (var student in Model.Students)
             {
                 <tr>
-                    <th scope="row">@student.Id</th>
+                    <th>@student.Id</th>
                     <td>@student.Name</td>
                     <td>@student.LastName</td>
                     <td>@student.Age</td>
                     <td>@student.Nit</td>
                     <td>
-                        <button type="submit" class="btn btn-secondary" 
+                        <button class="btn waves-effect waves-light" type="submit"
                                 asp-page-handler="delete"
-                                asp-route-id="@student.Id"
-                                >
+                                asp-route-id="@student.Id">
                             Delete
+                            <i class="material-icons right">delete</i>
                         </button>
+                    </td>
+                    <td>
+                        <a class="waves-effect waves-light btn"
+                           asp-page="Edit" asp-route-id="@student.Id">
+                            Edit
+                            <i class="material-icons right">edit</i>
+                        </a>
                     </td>
                 </tr>
             }
         </table>
     </form>
-
-    <a asp-page="Add" role="button" class="btn-primary">Create new stundent</a>
+    <br />  
+    <a asp-page="Add" class="waves-effect waves-light btn">
+        <i class="material-icons right">cloud</i>Create new student
+    </a>
     

@@ -20,7 +20,6 @@ namespace TGL.WebApp.Models
         [Required]
         public string Name { get; set; }
         public string Nit { get; set; }
-        [MaxLength(2)]
         public int? Age { get; set; }
 
     }

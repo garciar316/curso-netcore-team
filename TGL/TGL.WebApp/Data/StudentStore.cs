@@ -8,57 +8,45 @@ namespace TGL.WebApp.Data
 {
     public class StudentStore
     {
-        private List<Student> Students { get; set; } = new List<Student>();
-        public StudentStore()
+        //private List<Student> Students { get; set; } = new List<Student>();
+        public TGLContext Context { get; set; }
+        public StudentStore(TGLContext context)
         {
-            Students.Add(new Student
-            {
-                Id=Guid.NewGuid(),
-                Age = 21,
-                Name = "Sergio",
-                LastName = "Garcia",
-                Nit = "0001"
-            });
-            Students.Add(new Student
-            {
-                Id = Guid.NewGuid(),
-                Age = 19,
-                Name = "Juan",
-                LastName = "Perez",
-                Nit = "0002"
-            });
-            Students.Add(new Student
-            {
-                Id = Guid.NewGuid(),
-                Age = 23,
-                Name = "Andres",
-                LastName = "Lopez",
-                Nit = "0003"
-            });
-            Students.Add(new Student
-            {
-                Id = Guid.NewGuid(),
-                Age = 18,
-                Name = "Laura",
-                LastName = "Gaviria",
-                Nit = "0004"
-            });
+            Context = context;
+        }
+
+        internal void EditStudent(Student student)
+        {
+            Student currentstudent = GetStudentById(student.Id);
+            currentstudent.Name = student.Name;
+            currentstudent.LastName = student.LastName;
+            currentstudent.Age = student.Age;
+            currentstudent.Nit = student.Nit;
+            Context.Student.Update(currentstudent);
+            Context.SaveChanges();
+        }
+
+        internal Student GetStudentById(Guid id)
+        {
+            return Context.Student.FirstOrDefault(x => x.Id == id);
         }
 
         internal void AddStudent(Student student)
         {
-            Students.Add(student);
+            Context.Student.Add(student);
+            Context.SaveChanges();
         }
 
         internal void DeleteStudent(Guid id)
         {
-            var student = Students.FirstOrDefault(x => x.Id == id);
-            Students.Remove(student);
+            var student = Context.Student.FirstOrDefault(x => x.Id == id);
+            Context.Student.Remove(student);
+            Context.SaveChanges();
         }
 
         public List<Student> GetStudents()
         {
-            return this.Students;
+            return Context.Student.ToList();
         }
 
     }
