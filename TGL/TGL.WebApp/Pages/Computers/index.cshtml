@@ -1,0 +1,58 @@
+﻿@page
+@model TGL.WebApp.Pages.Computers.indexModel
+@{
+    ViewData["Title"] = "index";
+}
+
+<center>
+    <h1>Computers</h1>
+</center>
+
+<br />
+
+<form method="post">
+    <table class="striped">
+
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Cpu</th>
+                <th>Ram</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        @foreach (var computer in Model.Computers)
+        {
+            <tr>
+                <th>@computer.Id</th>
+                <td>@computer.Brand</td>
+                <td>@computer.Model</td>
+                <td>@computer.Cpu</td>
+                <td>@computer.Ram</td>
+                <td>
+                    <button class="btn waves-effect waves-light" type="submit"
+                            asp-page-handler="delete"
+                            asp-route-id="@computer.Id">
+                        Delete
+                        <i class="material-icons right">delete</i>
+                    </button>
+                </td>
+                <td>
+                    <a class="waves-effect waves-light btn"
+                       asp-page="Edit" asp-route-id="@computer.Id">
+                        Edit
+                        <i class="material-icons right">edit</i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+</form>
+<br />
+<a asp-page="Add" class="waves-effect waves-light btn">
+    <i class="material-icons right">cloud</i>Create new Computer
+</a>
+

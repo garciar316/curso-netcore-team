@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,25 +7,25 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using TGL.WebApp.Data;
 using TGL.WebApp.Models;
 
-namespace TGL.WebApp.Pages.Students
+namespace TGL.WebApp.Pages.Computers
 {
-    public class IndexModel : PageModel
+    public class indexModel : PageModel
     {
-        public StudentStore StudentStore { get; set; }
-        public List<Student> Students { get; set; }
+        public ComputerStore ComputerStore { get; set; }
         public List<Computer> Computers { get; set; }
-        public IndexModel(StudentStore studentStore)
+        public indexModel(ComputerStore computerStore)
         {
-            StudentStore = studentStore;
-            Students = StudentStore.GetStudents();
+            ComputerStore = computerStore;
+            Computers = computerStore.GetComputer();
         }
         public ActionResult OnPostDelete(Guid id)
         {
-            StudentStore.DeleteStudent(id);
+            ComputerStore.DeleteComputer(id);
             return RedirectToPage();
         }
         public void OnGet()
         {
+
         }
     }
 }

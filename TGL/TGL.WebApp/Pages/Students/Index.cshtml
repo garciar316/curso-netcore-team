@@ -25,28 +25,48 @@
 
             @foreach (var student in Model.Students)
             {
-                <tr>
-                    <th>@student.Id</th>
-                    <td>@student.Name</td>
-                    <td>@student.LastName</td>
-                    <td>@student.Age</td>
-                    <td>@student.Nit</td>
-                    <td>
-                        <button class="btn waves-effect waves-light" type="submit"
-                                asp-page-handler="delete"
-                                asp-route-id="@student.Id">
-                            Delete
-                            <i class="material-icons right">delete</i>
-                        </button>
-                    </td>
-                    <td>
-                        <a class="waves-effect waves-light btn"
-                           asp-page="Edit" asp-route-id="@student.Id">
-                            Edit
-                            <i class="material-icons right">edit</i>
-                        </a>
-                    </td>
-                </tr>
+        <tr>
+            <th>@student.Id</th>
+            <td>@student.Name</td>
+            <td>@student.LastName</td>
+            <td>@student.Age</td>
+            <td>@student.Nit</td>
+            <td>
+                <table>
+                    @foreach (var computer in Model.Computers)
+                    {
+                    <tr>
+                        <td>@computer.Brand</td>
+                        <td>@computer.Model</td>
+                        <td>@computer.Cpu</td>
+                        <td>@computer.Ram</td>
+                    </tr>
+                    }
+                </table>
+            </td>
+            <td>
+                <button class="btn waves-effect waves-light" type="submit"
+                        asp-page-handler="delete"
+                        asp-route-id="@student.Id">
+                    Delete
+                    <i class="material-icons right">delete</i>
+                </button>
+            </td>
+            <td>
+                <a class="waves-effect waves-light btn"
+                   asp-page="Edit" asp-route-id="@student.Id">
+                    Edit
+                    <i class="material-icons right">edit</i>
+                </a>
+            </td>
+            <td>
+                <a class="waves-effect waves-light btn"
+                   asp-page="../Computers/Add" asp-route-studentid="@student.Id">
+                    Add Computer
+                    <i class="material-icons right">computer</i>
+                </a>
+            </td>
+        </tr>
             }
         </table>
     </form>

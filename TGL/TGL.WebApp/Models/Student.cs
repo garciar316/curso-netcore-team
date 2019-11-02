@@ -21,6 +21,7 @@ namespace TGL.WebApp.Models
         public string Name { get; set; }
         public string Nit { get; set; }
         public int? Age { get; set; }
+        public List<Computer> Computers { get; set; }
 
     }
 }
